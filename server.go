@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
-	"./blog"
+	"github.com/nvhbk16k53/simple-blog/blog"
 )
 
 var log = logrus.New()

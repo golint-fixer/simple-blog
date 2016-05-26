@@ -77,7 +77,7 @@ func DeleteArticle(id int) error {
 }
 
 func ListArticle() ([]Article, error) {
-	rows, err := conn.Query("SELECT id, title, body FROM article ORDER BY id DECS")
+	rows, err := conn.Query("SELECT id, title, body FROM article ORDER BY id DESC")
 	if err != nil {
 		log.Error("db.ListArticle: ", err)
 		return make([]Article, 0), err
@@ -94,7 +94,7 @@ func ListArticle() ([]Article, error) {
 }
 
 func GetFirstArticle() (*Article, error) {
-	rows, err := conn.Query("SELECT id, title, body FROM article ORDER BY id DECS")
+	rows, err := conn.Query("SELECT id, title, body FROM article ORDER BY id DESC")
 	if err != nil {
 		log.Error("db.GetFistArticle: ", err)
 		return nil, err

@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	log "github.com/Sirupsen/logrus"
-	"../db"
+	"github.com/nvhbk16k53/simple-blog/db"
 )
 
 var templatePath = "template/"

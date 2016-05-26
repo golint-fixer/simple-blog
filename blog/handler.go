@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	log "github.com/Sirupsen/logrus"
-	"../db"
+	"github.com/nvhbk16k53/simple-blog/db"
 )
 
 func getId(w http.ResponseWriter, r *http.Request) (int, error) {

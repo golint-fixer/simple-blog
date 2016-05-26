@@ -5,13 +5,11 @@
 <body>
 
 <div id="topbar">
-<div><a href="/">Simple Blog</a></div>
+<div><h1><a href="/">Simple Blog</a></h1></div>
 </div>
 
 <div id="page">
-<div id="title">
-{{.Title}}
-</div>
+<div id="title"><h2>{{.Title}}<h2></div>
 <div id="body">
 {{printf "%s" .Body}}
 </div>

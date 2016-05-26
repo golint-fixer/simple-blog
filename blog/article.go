@@ -1,7 +1,7 @@
 package blog
 
 import (
-	"../db"
+	"github.com/nvhbk16k53/simple-blog/db"
 )
 
 func SaveArticle(article *db.Article) error {
