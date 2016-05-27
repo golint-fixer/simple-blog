@@ -8,7 +8,7 @@ import (
 
 func TestDBInsertArticle(t *testing.T) {
 	// Success insert article into database
-	article := db.Article{Id: 20, Title: "test", Body: "test"}
+	article := db.Article{ID: 20, Title: "test", Body: "test"}
 	err := db.InsertArticle(&article)
 	if err != nil {
 		t.Error("TestDBInsertArticle: ", err)
@@ -21,7 +21,7 @@ func TestDBInsertArticle(t *testing.T) {
 	}
 
 	// Delete article from database
-	err = db.DeleteArticle(article.Id)
+	err = db.DeleteArticle(article.ID)
 	if err != nil {
 		log.Fatal("TestDBInsertArticle: Delete article error: ", err)
 	}
@@ -29,20 +29,20 @@ func TestDBInsertArticle(t *testing.T) {
 
 func TestDBDeleteArticle(t *testing.T) {
 	// Insert article into database
-	article := db.Article{Id: 20, Title: "test", Body: "test"}
+	article := db.Article{ID: 20, Title: "test", Body: "test"}
 	err := db.InsertArticle(&article)
 	if err != nil {
 		log.Fatal("TestDBDeleteArticle: Create article error: ", err)
 	}
 
 	// Success delete article from database
-	err = db.DeleteArticle(article.Id)
+	err = db.DeleteArticle(article.ID)
 	if err != nil {
 		t.Error("TestDBDeleteArticle: ", err)
 	}
 
 	// Fail delete article from database
-	err = db.DeleteArticle(article.Id)
+	err = db.DeleteArticle(article.ID)
 	if err != nil {
 		t.Error("TestDBDeleteArticle: nil")
 	}
@@ -50,7 +50,7 @@ func TestDBDeleteArticle(t *testing.T) {
 
 func TestDBGetArticle(t *testing.T) {
 	// Insert article into database
-	article := db.Article{Id: 20, Title: "test", Body: "test"}
+	article := db.Article{ID: 20, Title: "test", Body: "test"}
 	err := db.InsertArticle(&article)
 	if err != nil {
 		log.Fatal("TestDBGetArticle: Create article error: ", err)
@@ -66,13 +66,13 @@ func TestDBGetArticle(t *testing.T) {
 	}
 
 	// Delete article from database
-	err = db.DeleteArticle(article.Id)
+	err = db.DeleteArticle(article.ID)
 	if err != nil {
 		log.Fatal("TestDBGetArticle: Delete article error: ", err)
 	}
 
 	// Fail get article from database
-	_, err = db.GetArticle(article.Id)
+	_, err = db.GetArticle(article.ID)
 	if err == nil {
 		t.Error("TestDBGetArticle: nil")
 	}
@@ -80,7 +80,7 @@ func TestDBGetArticle(t *testing.T) {
 
 func TestDBUpdateArticle(t *testing.T) {
 	// Insert article into database
-	article := db.Article{Id: 20, Title: "test", Body: "test"}
+	article := db.Article{ID: 20, Title: "test", Body: "test"}
 	err := db.InsertArticle(&article)
 	if err != nil {
 		log.Fatal("TestDBUpdateArticle: Create article error: ", err)
@@ -93,7 +93,7 @@ func TestDBUpdateArticle(t *testing.T) {
 	}
 
 	// Delete article from database
-	err = db.DeleteArticle(article.Id)
+	err = db.DeleteArticle(article.ID)
 	if err != nil {
 		log.Fatal("TestDBUpdateArticle: Delete article error: ", err)
 	}

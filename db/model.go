@@ -88,7 +88,7 @@ func ListArticle() ([]Article, error) {
 		log.Error("db.ListArticle: ", err)
 		return make([]Article, 0), err
 	}
-	articles := make([]Article, 0)
+	var articles []Article
 	for rows.Next() {
 		article, err := getArticle(rows)
 		if err != nil {

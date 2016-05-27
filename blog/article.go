@@ -9,9 +9,8 @@ func SaveArticle(article *db.Article) error {
 	_, err := db.GetArticle(article.ID)
 	if err != nil {
 		return db.InsertArticle(article)
-	} else {
-		return db.UpdateArticle(article)
 	}
+	return db.UpdateArticle(article)
 }
 
 // DeleteArticle delete an article record

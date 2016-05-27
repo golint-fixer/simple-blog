@@ -10,7 +10,7 @@ import (
 	"github.com/nvhbk16k53/simple-blog/db"
 )
 
-func getId(w http.ResponseWriter, r *http.Request) (int, error) {
+func getID(w http.ResponseWriter, r *http.Request) (int, error) {
 	validPath, err := regexp.Compile("^/(show|edit|save|delete)/([0-9]+)$")
 	if err != nil {
 		log.Error("Compile regexp error: ", err)
@@ -19,7 +19,7 @@ func getId(w http.ResponseWriter, r *http.Request) (int, error) {
 	}
 	m := validPath.FindStringSubmatch(r.URL.Path)
 	if m == nil {
-		log.Warn("getId: Invalid Page Title")
+		log.Warn("getID: Invalid Page Title")
 		return 0, errors.New("Invalid Page Title")
 	}
 	return strconv.Atoi(m[2])
@@ -50,7 +50,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 // ShowArticleHandler handler request to show article page
 func ShowArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("ShowArticleHandler: %s", r.URL.Path)
-	id, err := getId(w, r)
+	id, err := getID(w, r)
 	if err != nil {
 		http.Error(w, "Invalid Title Name", http.StatusNotFound)
 		return
@@ -70,7 +70,7 @@ func ShowArticleHandler(w http.ResponseWriter, r *http.Request) {
 // EditArticleHandler handle request to edit page
 func EditArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("EditArticleHandler: %s", r.URL.Path)
-	id, err := getId(w, r)
+	id, err := getID(w, r)
 	if err != nil {
 		http.Error(w, "Invalid Title Name", http.StatusNotFound)
 		return
@@ -88,7 +88,7 @@ func EditArticleHandler(w http.ResponseWriter, r *http.Request) {
 // DeleteArticleHandler handle request to delete page
 func DeleteArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("DeleteArticleHandler: %s", r.URL.Path)
-	id, err := getId(w, r)
+	id, err := getID(w, r)
 	if err != nil {
 		http.Error(w, "Invalid Title Name", http.StatusNotFound)
 		return
@@ -114,7 +114,7 @@ func DeleteArticleHandler(w http.ResponseWriter, r *http.Request) {
 // SaveArticleHandler handle request to save page
 func SaveArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("SaveArticleHandler: %s", r.URL.Path)
-	id, err := getId(w, r)
+	id, err := getID(w, r)
 	if err != nil {
 		http.Error(w, "Invalid Title Name", http.StatusNotFound)
 		return
