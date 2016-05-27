@@ -69,7 +69,7 @@ func InsertArticle(article *Article) error {
 }
 
 func DeleteArticle(id int) error {
-	_, err := conn.Exec("DELETE article WHERE id=$1", id)
+	_, err := conn.Exec("DELETE FROM article WHERE id=$1", id)
 	if err != nil {
 		log.Error("db.DeleteArticle: ", err)
 	}
