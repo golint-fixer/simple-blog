@@ -1,0 +1,9 @@
+language: go
+
+go:
+	- 1.6
+install:
+	- go get -u github.com/Sirupsen/logrus
+	- go get -u github.com/lib/pq
+	- go get -u github.com/kisielk/errcheck
+	- go get -u github.com/golang/lint/golint
