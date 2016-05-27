@@ -25,6 +25,7 @@ func getId(w http.ResponseWriter, r *http.Request) (int, error) {
 	return strconv.Atoi(m[2])
 }
 
+/* Handle request to index page */
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("IndexHander: %s", r.URL.Path)
 	validPath, err := regexp.Compile("^/$")
@@ -46,6 +47,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	RenderArticle(w, "article", article)
 }
 
+/* Handle request to show article page */
 func ShowArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("ShowArticleHandler: %s", r.URL.Path)
 	id, err := getId(w, r)
@@ -65,6 +67,7 @@ func ShowArticleHandler(w http.ResponseWriter, r *http.Request) {
 	RenderArticle(w, "article", article)
 }
 
+/* Handle request to edit article page */
 func EditArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("EditArticleHandler: %s", r.URL.Path)
 	id, err := getId(w, r)
@@ -82,6 +85,7 @@ func EditArticleHandler(w http.ResponseWriter, r *http.Request) {
 	RenderArticle(w, "edit", article)
 }
 
+/* Handle request to delete article page */
 func DeleteArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("DeleteArticleHandler: %s", r.URL.Path)
 	id, err := getId(w, r)
@@ -107,6 +111,7 @@ func DeleteArticleHandler(w http.ResponseWriter, r *http.Request) {
 	RenderArticle(w, "delete", nil)
 }
 
+/* Handle request to save article page */
 func SaveArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("SaveArticleHandler: %s", r.URL.Path)
 	id, err := getId(w, r)

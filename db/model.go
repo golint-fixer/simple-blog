@@ -8,6 +8,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
+/* Data type contain article information */
 type Article struct {
 	Id int
 	Title string
@@ -43,6 +44,7 @@ func getNextArticle(rows *sql.Rows) (*Article, error) {
 	return getArticle(rows)
 }
 
+/* Get an article from database given id */
 func GetArticle(id int) (*Article, error) {
 	rows, err := conn.Query("SELECT id, title, body FROM article WHERE id=$1", id)
 	if err != nil {
@@ -52,6 +54,7 @@ func GetArticle(id int) (*Article, error) {
 	return getNextArticle(rows)
 }
 
+/* Update an article in database */
 func UpdateArticle(article *Article) error {
 	_, err := conn.Exec("UPDATE article SET (title, body) = ($2, $3) WHERE id=$1", article.Id, article.Title, article.Body)
 	if err != nil {
@@ -60,6 +63,7 @@ func UpdateArticle(article *Article) error {
 	return err
 }
 
+/* Insert an article into database */
 func InsertArticle(article *Article) error {
 	_, err := conn.Exec("INSERT INTO article (id, title, body) VALUES ($1, $2, $3)", article.Id, article.Title, article.Body)
 	if err != nil {
@@ -68,6 +72,7 @@ func InsertArticle(article *Article) error {
 	return err
 }
 
+/* Delete an article by id from database */
 func DeleteArticle(id int) error {
 	_, err := conn.Exec("DELETE FROM article WHERE id=$1", id)
 	if err != nil {
@@ -76,6 +81,7 @@ func DeleteArticle(id int) error {
 	return err
 }
 
+/* List all article from database */
 func ListArticle() ([]Article, error) {
 	rows, err := conn.Query("SELECT id, title, body FROM article ORDER BY id DESC")
 	if err != nil {
@@ -93,6 +99,7 @@ func ListArticle() ([]Article, error) {
 	return articles, nil
 }
 
+/* Get largest id article */
 func GetFirstArticle() (*Article, error) {
 	rows, err := conn.Query("SELECT id, title, body FROM article ORDER BY id DESC")
 	if err != nil {

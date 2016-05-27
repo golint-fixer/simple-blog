@@ -12,6 +12,7 @@ var templatePath = "template/"
 
 var templates = template.Must(template.ParseGlob(templatePath + "*.tmpl"))
 
+/* Render index page template */
 func RenderIndex(w http.ResponseWriter) {
 	err := templates.ExecuteTemplate(w, "index.tmpl", nil)
 	if err != nil {
@@ -20,6 +21,7 @@ func RenderIndex(w http.ResponseWriter) {
 	}
 }
 
+/* Render article page template */
 func RenderArticle(w http.ResponseWriter, tmpl string, article *db.Article) {
 	err := templates.ExecuteTemplate(w, tmpl + ".tmpl", article)
 	if err != nil {

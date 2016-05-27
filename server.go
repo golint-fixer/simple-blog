@@ -16,5 +16,8 @@ func main() {
 	http.HandleFunc("/edit/", blog.EditArticleHandler)
 	http.HandleFunc("/save/", blog.SaveArticleHandler)
 	http.HandleFunc("/delete/", blog.DeleteArticleHandler)
-	http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		log.Fatal("http.ListenAndServe: ", err)
+	}
 }
