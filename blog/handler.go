@@ -25,7 +25,7 @@ func getId(w http.ResponseWriter, r *http.Request) (int, error) {
 	return strconv.Atoi(m[2])
 }
 
-/* Handle request to index page */
+// IndexHandler handler request to index page
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("IndexHander: %s", r.URL.Path)
 	validPath, err := regexp.Compile("^/$")
@@ -47,7 +47,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	RenderArticle(w, "article", article)
 }
 
-/* Handle request to show article page */
+// ShowArticleHandler handler request to show article page
 func ShowArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("ShowArticleHandler: %s", r.URL.Path)
 	id, err := getId(w, r)
@@ -67,7 +67,7 @@ func ShowArticleHandler(w http.ResponseWriter, r *http.Request) {
 	RenderArticle(w, "article", article)
 }
 
-/* Handle request to edit article page */
+// EditArticleHandler handle request to edit page
 func EditArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("EditArticleHandler: %s", r.URL.Path)
 	id, err := getId(w, r)
@@ -80,12 +80,12 @@ func EditArticleHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	article, err := GetArticle(id)
 	if err != nil {
-		article = &db.Article{Id: id, Title: "Untitle"}
+		article = &db.Article{ID: id, Title: "Untitle"}
 	}
 	RenderArticle(w, "edit", article)
 }
 
-/* Handle request to delete article page */
+// DeleteArticleHandler handle request to delete page
 func DeleteArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("DeleteArticleHandler: %s", r.URL.Path)
 	id, err := getId(w, r)
@@ -111,7 +111,7 @@ func DeleteArticleHandler(w http.ResponseWriter, r *http.Request) {
 	RenderArticle(w, "delete", nil)
 }
 
-/* Handle request to save article page */
+// SaveArticleHandler handle request to save page
 func SaveArticleHandler(w http.ResponseWriter, r *http.Request) {
 	log.Infof("SaveArticleHandler: %s", r.URL.Path)
 	id, err := getId(w, r)
@@ -124,7 +124,7 @@ func SaveArticleHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	title := r.FormValue("titletext")
 	body := r.FormValue("bodytext")
-	article := &db.Article{Id: id, Title: title, Body: body}
+	article := &db.Article{ID: id, Title: title, Body: body}
 	err = SaveArticle(article)
 	if err != nil {
 		log.Error("Save article: ", err)

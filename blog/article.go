@@ -4,9 +4,9 @@ import (
 	"github.com/nvhbk16k53/simple-blog/db"
 )
 
-/* Save article */
+// SaveArticle save an article information
 func SaveArticle(article *db.Article) error {
-	_, err := db.GetArticle(article.Id)
+	_, err := db.GetArticle(article.ID)
 	if err != nil {
 		return db.InsertArticle(article)
 	} else {
@@ -14,17 +14,17 @@ func SaveArticle(article *db.Article) error {
 	}
 }
 
-/* Delete Article */
+// DeleteArticle delete an article record
 func DeleteArticle(article *db.Article) error {
-	return db.DeleteArticle(article.Id)
+	return db.DeleteArticle(article.ID)
 }
 
-/* Get Article */
+// GetArticle get an article record
 func GetArticle(id int) (*db.Article, error) {
 	return db.GetArticle(id)
 }
 
-/* Get First Article */
+// GetFirstArticle get first article record
 func GetFirstArticle() (*db.Article, error) {
 	return db.GetFirstArticle()
 }

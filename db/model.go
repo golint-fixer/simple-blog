@@ -8,9 +8,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
-/* Data type contain article information */
+// Article data type of article record
 type Article struct {
-	Id int
+	ID int
 	Title string
 	Body string
 }
@@ -33,7 +33,7 @@ func getArticle(rows *sql.Rows) (*Article, error) {
 		log.Error("db.getArticle: ", err)
 		return nil, err
 	}
-	return &Article{Id: id, Title: title, Body: body}, nil
+	return &Article{ID: id, Title: title, Body: body}, nil
 }
 
 func getNextArticle(rows *sql.Rows) (*Article, error) {
@@ -44,7 +44,7 @@ func getNextArticle(rows *sql.Rows) (*Article, error) {
 	return getArticle(rows)
 }
 
-/* Get an article from database given id */
+// GetArticle get an article by id
 func GetArticle(id int) (*Article, error) {
 	rows, err := conn.Query("SELECT id, title, body FROM article WHERE id=$1", id)
 	if err != nil {
@@ -54,25 +54,25 @@ func GetArticle(id int) (*Article, error) {
 	return getNextArticle(rows)
 }
 
-/* Update an article in database */
+// UpdateArticle update article information
 func UpdateArticle(article *Article) error {
-	_, err := conn.Exec("UPDATE article SET (title, body) = ($2, $3) WHERE id=$1", article.Id, article.Title, article.Body)
+	_, err := conn.Exec("UPDATE article SET (title, body) = ($2, $3) WHERE id=$1", article.ID, article.Title, article.Body)
 	if err != nil {
 		log.Error("db.UpdateArticle: ", err)
 	}
 	return err
 }
 
-/* Insert an article into database */
+// InsertArticle insert article information
 func InsertArticle(article *Article) error {
-	_, err := conn.Exec("INSERT INTO article (id, title, body) VALUES ($1, $2, $3)", article.Id, article.Title, article.Body)
+	_, err := conn.Exec("INSERT INTO article (id, title, body) VALUES ($1, $2, $3)", article.ID, article.Title, article.Body)
 	if err != nil {
 		log.Error("db.InsertArticle: ", err)
 	}
 	return err
 }
 
-/* Delete an article by id from database */
+// DeleteArticle delete an article record
 func DeleteArticle(id int) error {
 	_, err := conn.Exec("DELETE FROM article WHERE id=$1", id)
 	if err != nil {
@@ -81,7 +81,7 @@ func DeleteArticle(id int) error {
 	return err
 }
 
-/* List all article from database */
+// ListArticle list all article
 func ListArticle() ([]Article, error) {
 	rows, err := conn.Query("SELECT id, title, body FROM article ORDER BY id DESC")
 	if err != nil {
@@ -99,7 +99,7 @@ func ListArticle() ([]Article, error) {
 	return articles, nil
 }
 
-/* Get largest id article */
+// GetFirstArticle get first artilce record
 func GetFirstArticle() (*Article, error) {
 	rows, err := conn.Query("SELECT id, title, body FROM article ORDER BY id DESC")
 	if err != nil {
